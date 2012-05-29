@@ -85,31 +85,6 @@ public class VoMinerActivity extends Activity implements OnItemSelectedListener,
         //Load up the last selected sector
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         
-        //GOGO super uber messy nested method calls and casts!
-        systemList.setSelection(((ArrayAdapter<String>) systemList.getAdapter()).getPosition(
-        		settings.getString(PREF_LAST_SYSTEM, "")));
-        gridAplhaList.setSelection(((ArrayAdapter<String>) gridAplhaList.getAdapter()).getPosition(
-        		settings.getString(PREF_LAST_SECTOR_APLHA, "")));
-        gridNumList.setSelection(((ArrayAdapter<String>) gridNumList.getAdapter()).getPosition(
-        		settings.getString(PREF_LAST_SECTOR_NUM, "")));
-        
-        //Add a listener to the add button
-        ((Button)findViewById(R.id.button_add_mineral)).setOnClickListener(this);
-        
-        //Add the listener to the mineral list
-        ((ListView)findViewById(R.id.oreList)).setOnItemClickListener(this);
-        
-        //Add the assigned minerals to the list
-       	Spinner oreSpinner = (Spinner) findViewById(R.id.mineralList);
-       	//Set up the list
-       	mineralList = new ArrayList<String>(Static.mineralList);
-       	//Add it all in
-      	mineralAdapter = new ArrayAdapter<String>(this,
-      			android.R.layout.simple_list_item_1,
-              	mineralList);
-        mineralAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        oreSpinner.setAdapter(mineralAdapter);
-        
         //Pasted code begins here
         
         //Set up all the spinners. One for the system and another two for the coords. I hate how messy this is
@@ -135,6 +110,31 @@ public class VoMinerActivity extends Activity implements OnItemSelectedListener,
         		Static.numCoordList);
        gridNumAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
        gridNumSpinner.setAdapter(gridNumAdapter);
+        
+        //GOGO super uber messy nested method calls and casts!
+        systemList.setSelection(((ArrayAdapter<String>) systemList.getAdapter()).getPosition(
+        		settings.getString(PREF_LAST_SYSTEM, "")));
+        gridAplhaList.setSelection(((ArrayAdapter<String>) gridAplhaList.getAdapter()).getPosition(
+        		settings.getString(PREF_LAST_SECTOR_APLHA, "")));
+        gridNumList.setSelection(((ArrayAdapter<String>) gridNumList.getAdapter()).getPosition(
+        		settings.getString(PREF_LAST_SECTOR_NUM, "")));
+        
+        //Add a listener to the add button
+        ((Button)findViewById(R.id.button_add_mineral)).setOnClickListener(this);
+        
+        //Add the listener to the mineral list
+        ((ListView)findViewById(R.id.oreList)).setOnItemClickListener(this);
+        
+        //Add the assigned minerals to the list
+       	Spinner oreSpinner = (Spinner) findViewById(R.id.mineralList);
+       	//Set up the list
+       	mineralList = new ArrayList<String>(Static.mineralList);
+       	//Add it all in
+      	mineralAdapter = new ArrayAdapter<String>(this,
+      			android.R.layout.simple_list_item_1,
+              	mineralList);
+        mineralAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        oreSpinner.setAdapter(mineralAdapter);
     }
     
     /**
