@@ -38,7 +38,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
  * The main activity for the app
  * @author Steve "Uru" West <uruwolf@gmail.com>
  */
-public class VoMinerActivity extends Activity implements OnItemSelectedListener, OnClickListener, OnItemClickListener{
+public class VOMinerActivity extends Activity implements OnItemSelectedListener, OnClickListener, OnItemClickListener{
 	
 	//Tag to use for debugging
 	public static final String TAG = "Vo-Miner";
