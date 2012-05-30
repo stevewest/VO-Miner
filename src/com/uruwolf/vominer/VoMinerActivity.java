@@ -25,7 +25,9 @@ import java.util.List;
 import com.uruwolf.vominer.data.*;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
@@ -66,7 +68,7 @@ public class VOMinerActivity extends Activity implements OnItemSelectedListener,
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
         data = new SectorDataSource(this);
@@ -140,12 +142,33 @@ public class VOMinerActivity extends Activity implements OnItemSelectedListener,
     /**
      * Show a fancy menu at the top right. Not sure if this will stay or not
      */
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.main_activity, menu);
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menu_notes:
+                showSectorNotes();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    
+    private void showSectorNotes(){
+    	Intent intent = new Intent(this, SectorNotesActivity.class);
+		intent.putExtra("system", currentSector.getSystem());
+		intent.putExtra("alpha", currentSector.getAplhaCoord());
+		intent.putExtra("num", currentSector.getNumCoord());
+		startActivity(intent);
+    }
     
     @Override
     public void onPause(){
