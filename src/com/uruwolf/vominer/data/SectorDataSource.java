@@ -18,15 +18,11 @@
  */
 package com.uruwolf.vominer.data;
 
-import com.uruwolf.vominer.R;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 /**
  * Acts as a layer between Objects and SQL for sectors
@@ -214,5 +210,19 @@ public class SectorDataSource {
 		String[] whereData = {sector.getId()+"", mineral.getMineral()};
 		
 		database.delete(SQLiteHelper.TABLE_SECTOR_MINERALS, where, whereData);
+	}
+	
+	/**
+	 * Updates the given sector with the notes contained
+	 * @param sector Must have a id > 0
+	 */
+	public void updateSectorNotes(Sector sector){
+		if(sector.getId() <= 0)
+			throw new IllegalArgumentException("Id must be > 0");
+		
+		ContentValues values = new ContentValues();
+		values.put(SQLiteHelper.COL_SECTORS_NOTES, sector.getNotes());
+		
+		database.update(SQLiteHelper.TABLE_SECTORS, values, SQLiteHelper.COL_ID+"="+sector.getId(), null);
 	}
 }

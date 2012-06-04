@@ -4,4 +4,6 @@
     <string name="button_add_mineral">Add</string>
     <string name="minerals_found">Minerals found in this sector:</string>
     <string name="sector_notes">Sector Notes</string>
+    <string name="done">Done</string>
+    <string name="sector_full_title">%1$s: %2$s-%3$s</string>
 </resources>
