@@ -6,4 +6,8 @@
     <string name="sector_notes">Sector Notes</string>
     <string name="done">Done</string>
     <string name="sector_full_title">%1$s: %2$s-%3$s</string>
+    
+    <string name="search">Search</string>
+    <string name="search_explain">Select a mineral to search for</string>
+    <string name="search_result_explain">Sectors containing %1$s:</string>
 </resources>

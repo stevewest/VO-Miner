@@ -20,6 +20,8 @@
         </activity>
         
         <activity android:name=".SectorNotesActivity"></activity>
+        <activity android:name=".MineralSearchActivity"></activity>
+        <activity android:name=".SectorListActivity"></activity>
     </application>
 
 </manifest>

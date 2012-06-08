@@ -157,6 +157,9 @@ public class VOMinerActivity extends Activity implements OnItemSelectedListener,
             case R.id.menu_notes:
                 showSectorNotes();
                 return true;
+            case R.id.menu_search:
+            	showSearch();
+            	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -168,6 +171,10 @@ public class VOMinerActivity extends Activity implements OnItemSelectedListener,
 		intent.putExtra("alpha", currentSector.getAplhaCoord());
 		intent.putExtra("num", currentSector.getNumCoord());
 		startActivity(intent);
+    }
+    
+    private void showSearch(){
+    	startActivity(new Intent(this, MineralSearchActivity.class));
     }
     
     @Override
