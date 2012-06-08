@@ -18,6 +18,8 @@
  */
 package com.uruwolf.vominer.data;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -224,5 +226,46 @@ public class SectorDataSource {
 		values.put(SQLiteHelper.COL_SECTORS_NOTES, sector.getNotes());
 		
 		database.update(SQLiteHelper.TABLE_SECTORS, values, SQLiteHelper.COL_ID+"="+sector.getId(), null);
+	}
+	
+	/**
+	 * Takes the given mineral name and returns all sectors with that mineral assigned
+	 * @param mineral
+	 * @return
+	 */
+	public ArrayList<Sector> getSectorsContainingMineral(String mineral){
+		// Select all minerals with the name, return the sectors
+		String query = "SELECT "+SQLiteHelper.TABLE_SECTORS+".*"+
+					"FROM "+SQLiteHelper.TABLE_SECTORS+" "+
+					"WHERE "+SQLiteHelper.TABLE_SECTORS+"."+SQLiteHelper.COL_ID+
+					" IN ("+
+						"SELECT "+SQLiteHelper.COL_SECTOR_MINERALS_SECTOR+
+						" FROM "+SQLiteHelper.TABLE_SECTOR_MINERALS+
+						" WHERE "+SQLiteHelper.COL_SECTOR_MINERALS_MINERAL+" = '"+mineral+"'"+
+					");";
+		
+		//Do the query
+		Cursor cursor = database.rawQuery(query, null);
+		cursor.moveToFirst();
+		
+		//Work through and build up the list
+		ArrayList<Sector> sectorList = new ArrayList<Sector>();
+		if(cursor.getCount() > 0){
+			do{
+				sectorList.add(cursorToSector(cursor));
+			} while(cursor.moveToNext());
+		}
+		
+		//Send back the list of sectors
+		return sectorList;
+	}
+	
+	/**
+	 * Takes the given mineral name and returns all sectors with that mineral assigned
+	 * @param mineral
+	 * @return
+	 */
+	public ArrayList<Sector> getSectorsContainingMineral(Mineral mineral){
+		return getSectorsContainingMineral(mineral.getMineral());
 	}
 }
