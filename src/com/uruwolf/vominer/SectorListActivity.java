@@ -22,6 +22,8 @@ public class SectorListActivity extends Activity {
 
 	private String mineral;
 	private SectorDataSource data;
+	private ArrayList<String> sectorStrings;
+	private ArrayAdapter<String> listAdapter;
 	
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -37,22 +39,10 @@ public class SectorListActivity extends Activity {
 			);
 		
 		ListView list = (ListView)findViewById(R.id.search_result);
-		//Do something smart to build a list of sectors
-		List<Sector> sectors = data.getSectorsContainingMineral(mineral);
 		
-		ArrayList<String> sectorStrings = new ArrayList<String>();
+		sectorStrings = new ArrayList<String>();
 		
-		//Loop through the found sectors and build them into a list of Strings for the ListView
-		for(Sector sec : sectors){
-			sectorStrings.add(String.format(
-					getResources().getString(R.string.sector_full_title),
-					sec.getSystem(),
-					sec.getAplhaCoord(),
-					sec.getNumCoord()
-					));
-		}
-		
-		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,
+		listAdapter = new ArrayAdapter<String>(this,
 	        		android.R.layout.simple_list_item_1,
 	        		sectorStrings);
 		
@@ -69,5 +59,20 @@ public class SectorListActivity extends Activity {
     public void onResume(){
     	super.onResume();
     	data.open();
+    	
+    	//Do something smart to build a list of sectors
+    	List<Sector> sectors = data.getSectorsContainingMineral(mineral);
+    	sectorStrings.clear();		
+    	//Loop through the found sectors and build them into a list of Strings for the ListView
+    	for(Sector sec : sectors){
+    		sectorStrings.add(String.format(
+    				getResources().getString(R.string.sector_full_title),
+    				sec.getSystem(),
+    				sec.getAplhaCoord(),
+    				sec.getNumCoord()
+    				));
+    	}
+    	
+    	listAdapter.notifyDataSetChanged();
     }
 }

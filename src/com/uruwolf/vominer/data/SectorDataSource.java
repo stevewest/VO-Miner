@@ -128,7 +128,6 @@ public class SectorDataSource {
 	}
 	
 	private Sector cursorToSector(Cursor cursor){
-		cursor.moveToFirst();
 		//Populate the sector
 		Sector sector = new Sector();
 		sector.setId(cursor.getInt(0)); //Load the ID
@@ -158,8 +157,7 @@ public class SectorDataSource {
 				null
 				);
 		
-		if(cursor.getCount() > 0){
-			cursor.moveToFirst();
+		if(cursor.moveToFirst()){
 			do{
 				sector.addMineral(cursorToMineral(cursor));
 			}while(cursor.moveToNext());
@@ -246,11 +244,11 @@ public class SectorDataSource {
 		
 		//Do the query
 		Cursor cursor = database.rawQuery(query, null);
-		cursor.moveToFirst();
 		
 		//Work through and build up the list
 		ArrayList<Sector> sectorList = new ArrayList<Sector>();
-		if(cursor.getCount() > 0){
+		
+		if(cursor.moveToFirst()){
 			do{
 				sectorList.add(cursorToSector(cursor));
 			} while(cursor.moveToNext());
