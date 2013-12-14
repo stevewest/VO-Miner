@@ -114,17 +114,9 @@ public class SectorDataSource {
 		values.put(SQLiteHelper.COL_SECTORS_NUM, sector.getNumCoord());
 		values.put(SQLiteHelper.COL_SECTORS_NOTES, sector.getNotes());
 		//Perform the insert and get the ID for later
-		long insertID = database.insert(SQLiteHelper.TABLE_SECTORS, null, values);
+		database.insertOrThrow(SQLiteHelper.TABLE_SECTORS, null, values);
 		
-		//Grab our new row so we can return it
-		Cursor cursor = database.query(SQLiteHelper.TABLE_SECTORS,
-				null,
-				SQLiteHelper.COL_ID+"="+insertID,
-				null, null, null, null);
-		Sector newSector = cursorToSector(cursor);
-		cursor.close();
-		
-		return newSector;
+		return sector;
 	}
 	
 	private Sector cursorToSector(Cursor cursor){

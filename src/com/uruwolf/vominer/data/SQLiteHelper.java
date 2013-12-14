@@ -18,9 +18,6 @@
  */
 package com.uruwolf.vominer.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -75,15 +72,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 				"FOREIGN KEY("+COL_SECTOR_MINERALS_SECTOR+") REFERENCES "+TABLE_SECTORS+"("+COL_ID+") ON UPDATE CASCADE"+
 				");";
 		
-		Log.d(com.uruwolf.vominer.VOMinerActivity.TAG, "Creating new database");
+		Log.d(com.uruwolf.vominer.VoMinerActivity.TAG, "Creating new database");
 		db.execSQL(createSectorsQuery);
 		db.execSQL(createMineralsQuery);
-		Log.d(com.uruwolf.vominer.VOMinerActivity.TAG, "Database created");
+		Log.d(com.uruwolf.vominer.VoMinerActivity.TAG, "Database created");
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.d(com.uruwolf.vominer.VOMinerActivity.TAG, "Upgrade the database? I don't know how the fuck to do that!");
+		Log.d(com.uruwolf.vominer.VoMinerActivity.TAG, "Upgrade the database? I don't know how the fuck to do that!");
 	}
 
 }

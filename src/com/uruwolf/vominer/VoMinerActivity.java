@@ -40,7 +40,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
  * The main activity for the app
  * @author Steve "Uru" West <uruwolf@gmail.com>
  */
-public class VOMinerActivity extends Activity implements OnItemSelectedListener, OnClickListener, OnItemClickListener{
+public class VoMinerActivity extends Activity implements OnItemSelectedListener, OnClickListener, OnItemClickListener{
 	
 	//Tag to use for debugging
 	public static final String TAG = "Vo-Miner";
@@ -90,28 +90,25 @@ public class VOMinerActivity extends Activity implements OnItemSelectedListener,
         //Pasted code begins here
         
         //Set up all the spinners. One for the system and another two for the coords. I hate how messy this is
-      	Spinner systemSpinner = (Spinner) findViewById(R.id.systemList);
         ArrayAdapter<String> systemAdapter = new ArrayAdapter<String>(this,
         		android.R.layout.simple_list_item_1,
               	Static.systemList);
         systemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        systemSpinner.setAdapter(systemAdapter);
+        systemList.setAdapter(systemAdapter);
       		
         //Load the letter selection
-        Spinner gridAlphaSpinner = (Spinner) findViewById(R.id.gridAlphaList);
         ArrayAdapter<String> gridAlphaAdapter = new ArrayAdapter<String>(this,
         		android.R.layout.simple_list_item_1,
         		Static.alphaCoordList);
         gridAlphaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gridAlphaSpinner.setAdapter(gridAlphaAdapter);
+        gridAplhaList.setAdapter(gridAlphaAdapter);
 
         //And finally load the number selector
-        Spinner gridNumSpinner = (Spinner) findViewById(R.id.gridNumList);
         ArrayAdapter<String> gridNumAdapter = new ArrayAdapter<String>(this,
         		android.R.layout.simple_list_item_1,
         		Static.numCoordList);
        gridNumAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       gridNumSpinner.setAdapter(gridNumAdapter);
+       gridNumList.setAdapter(gridNumAdapter);
         
         //GOGO super uber messy nested method calls and casts!
         systemList.setSelection(((ArrayAdapter<String>) systemList.getAdapter()).getPosition(
